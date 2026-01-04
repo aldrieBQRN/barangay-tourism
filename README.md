@@ -1,28 +1,47 @@
-# Barangay Tourism Management System
+# 🌴 Barangay Tourism Management System (BTMS)
 
-A comprehensive tourism portal built with **Laravel 11** and **Filament v3** designed to streamline guest arrivals, beach resort bookings, and local fee collections.
+A robust, enterprise-grade tourism portal developed with **Laravel 11** and **Filament v3**. This system provides an end-to-end solution for local governments and resort owners to manage guest traffic, environmental impact fees, and accommodation logistics through a highly secure, role-based architecture.
 
-## 🚀 Key Features
+## 🚀 Key Modules & Features
 
-### 📊 Role-Based Dashboards
-* **Admin:** Full access to financial analytics, payment methods, and system configurations.
-* **Staff:** Operational view limited to guest arrivals and booking lists, hiding all sensitive financial data.
+### 📊 Intelligence Dashboards
+* **Administrative Analytics:** Provides the Super Admin with a high-level overview of revenue streams, payment method distribution, and resort popularity.
+* **Operational Staff View:** A streamlined, "clutter-free" dashboard for frontline staff (e.g., Clarisse) focusing on immediate tasks: Guests Today, Expected Arrivals, and Pending Check-ins.
 
-### 🏨 Beach Resort & Accommodation Management
-* **Resorts:** A dedicated resource to manage beach resort directories, including location and contact details.
-* **Accommodations:** Manage various room types, cottages, and lodging availability linked to specific resorts.
-* **Bookings:** Integrated guest reservation system with real-time tracking of visit dates and payment statuses (Paid/Unpaid).
+### 🏨 Destination & Lodging Management
+* **Resort Directory:** A centralized registry for all beach resorts, including metadata for locations and direct contact information.
+* **Accommodation Inventory:** Granular management of available lodging options—from luxury rooms to beachfront cottages—linked directly to their parent resorts.
+* **Dynamic Booking Engine:** Real-time guest reservation tracking featuring automated status badges for "Paid" and "Unpaid" arrivals to ensure revenue integrity.
 
-### 💰 Fee Configuration (System Settings)
-* **Manage Settings:** A specialized resource for Admins to configure standard port fees:
-    * **Ecological Fee:** Standard environmental fee per guest.
-    * **Parking Fee:** Standard fee for vehicle arrivals.
-    * **Boat Fee:** Standard transport/island hopping fees.
+### 💰 Global Fee Configuration
+* **Unified Settings Resource:** A dedicated administrative control panel to standardize local tourism costs across the entire barangay:
+    * **Ecological Fee:** Automated environmental conservation tax applied per guest.
+    * **Parking Fee:** Fixed-rate vehicle entry management.
+    * **Boat Fee:** Standardized transport and island-hopping logistics pricing.
 
-## 🛠️ Installation & Setup
+## 🔐 Advanced Security & RBAC
+The system utilizes **Filament Shield** to implement a strict "Least Privilege" security model:
 
-1. **Clone and Install:**
-   ```bash
-   git clone <your-repo-url>
-   composer install
-   npm install && npm run build
+* **Logic Separation:** Management resources (Users, Roles, System Settings) are strictly isolated from the Staff role to prevent unauthorized configuration changes.
+* **Widget Security:** Front-end components are conditionally rendered based on user roles, ensuring sensitive financial charts never appear on staff terminals.
+
+## 🛠️ Technical Stack & Setup
+
+1.  **Core Framework:** Laravel 11 (PHP 8.2+)
+2.  **Admin UI:** Filament v3 (TALL Stack)
+3.  **Permissions:** Spatie Permission / Filament Shield
+4.  **Database:** MySQL/MariaDB
+
+### Quick Installation
+```bash
+# Install and Build
+composer install
+npm install && npm run build
+
+# Setup Database and Security
+php artisan migrate
+php artisan shield:generate --panel=admin
+
+# Clear Caches for UI Updates
+php artisan permission:cache-reset
+php artisan filament:clear-cached-components
